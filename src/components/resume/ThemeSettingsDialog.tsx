@@ -15,10 +15,9 @@ import { useAppModeStore } from "@/store/appModeStore";
 
 const FONT_OPTIONS = [
   { value: "Inter", label: "Inter (Modern)" },
-  { value: "Georgia", label: "Georgia (Classic)" },
-  { value: "Times New Roman", label: "Times New Roman" },
-  { value: "Arial", label: "Arial" },
-  { value: "Helvetica", label: "Helvetica" },
+  { value: "EB Garamond", label: "EB Garamond (Elegant)" },
+  { value: "Times New Roman", label: "Times New Roman (Classic)" },
+  { value: "Helvetica", label: "Helvetica (Clean)" },
 ];
 
 const LINE_HEIGHT_OPTIONS = [

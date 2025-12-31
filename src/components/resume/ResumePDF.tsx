@@ -8,20 +8,36 @@ import { formatDateRange } from "@/lib/utils";
 import { sortSections, sectionDisplayTitle } from "@/lib/resume";
 import { useAppModeStore } from "@/store/appModeStore";
 import { useResumeStore } from "@/store/resumeStore";
+import { DEFAULT_RESUME_METADATA } from "@resume/shared";
 
 // Disable hyphenation to match preview behavior
 Font.registerHyphenationCallback((word) => [word]);
 
-// Register EB Garamond for English (matches preview)
+// Register Inter font
 Font.register({
-  family: "EBGaramond",
+  family: "Inter",
   fonts: [
     {
-      src: "https://fonts.gstatic.com/s/ebgaramond/v27/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-6_RkC49_S6Q.ttf",
+      src: "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf",
       fontWeight: 400,
     },
     {
-      src: "https://fonts.gstatic.com/s/ebgaramond/v27/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-2fNkC49_S6Q.ttf",
+      src: "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf",
+      fontWeight: 700,
+    },
+  ],
+});
+
+// Register EB Garamond
+Font.register({
+  family: "EB Garamond",
+  fonts: [
+    {
+      src: "https://fonts.gstatic.com/s/ebgaramond/v32/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-6_RUAw.ttf",
+      fontWeight: 400,
+    },
+    {
+      src: "https://fonts.gstatic.com/s/ebgaramond/v32/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-DPNUAw.ttf",
       fontWeight: 700,
     },
   ],
@@ -32,25 +48,46 @@ Font.register({
   family: "IBMPlexSansArabic",
   fonts: [
     {
-      src: "https://fonts.gstatic.com/s/ibmplexsansarabic/v12/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6YNe3PC5eMlAMg0.ttf",
+      src: "https://fonts.gstatic.com/s/ibmplexsansarabic/v14/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6bs6.ttf",
       fontWeight: 400,
     },
     {
-      src: "https://fonts.gstatic.com/s/ibmplexsansarabic/v12/Qw3FZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPy_dCTVsVJKxTs.ttf",
+      src: "https://fonts.gstatic.com/s/ibmplexsansarabic/v14/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-dCT.ttf",
       fontWeight: 700,
     },
   ],
 });
 
-const createStyles = (isRTL: boolean) =>
+// Map UI font names to PDF-compatible font families
+// Built-in PDF fonts: Helvetica, Times-Roman, Courier
+const getPdfFontFamily = (fontFamily: string, isRTL: boolean): string => {
+  if (isRTL) return "IBMPlexSansArabic";
+
+  switch (fontFamily) {
+    case "Inter":
+      return "Inter";
+    case "EB Garamond":
+      return "EB Garamond";
+    case "Georgia":
+      return "Times-Roman"; // Similar serif font
+    case "Times New Roman":
+      return "Times-Roman"; // Built-in PDF font
+    case "Arial":
+    case "Helvetica":
+      return "Helvetica"; // Built-in PDF font
+    default:
+      return "Inter"; // Default fallback
+  }
+};
+
+const createStyles = (isRTL: boolean, pdfFontFamily: string) =>
   StyleSheet.create({
     page: {
       flexDirection: "column",
       backgroundColor: "#ffffff",
       // Tighter margins to fit more content (similar to Word's narrow margins)
       padding: "20px 24px 20px 24px",
-      // Use EB Garamond for English, IBM Plex Sans Arabic for RTL
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "EBGaramond",
+      fontFamily: pdfFontFamily,
     },
     header: {
       marginBottom: 8,
@@ -61,7 +98,7 @@ const createStyles = (isRTL: boolean) =>
       fontWeight: 700,
       marginBottom: 2,
       textAlign: "center",
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "EBGaramond",
+      fontFamily: pdfFontFamily,
     },
     headline: {
       fontSize: 10,
@@ -95,7 +132,7 @@ const createStyles = (isRTL: boolean) =>
     sectionHeader: {
       fontSize: 11,
       fontWeight: 700,
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "EBGaramond",
+      fontFamily: pdfFontFamily,
       textTransform: "uppercase",
       letterSpacing: 0.5,
       marginBottom: 4,
@@ -116,14 +153,14 @@ const createStyles = (isRTL: boolean) =>
     entryTitle: {
       fontSize: 10.5,
       fontWeight: 700,
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "EBGaramond",
+      fontFamily: pdfFontFamily,
       color: "#1a202c",
       textAlign: isRTL ? "right" : "left",
     },
     entrySubtitle: {
       fontSize: 10.5,
       fontWeight: 400,
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "EBGaramond",
+      fontFamily: pdfFontFamily,
       color: "#1a202c",
     },
     entryCompany: {
@@ -165,7 +202,7 @@ const createStyles = (isRTL: boolean) =>
     },
     skillTitle: {
       fontWeight: "bold",
-      fontFamily: isRTL ? "IBMPlexSansArabic" : "Times-Bold",
+      fontFamily: pdfFontFamily,
     },
     projectLink: {
       fontSize: 9,
@@ -216,7 +253,10 @@ const ContactItem = ({
 };
 
 const ResumePdfDocument = ({ resume, isRTL }: { resume: Resume; isRTL: boolean }) => {
-  const styles = createStyles(isRTL);
+  // Get font from metadata, with fallback to defaults
+  const metadata = resume.metadata ?? DEFAULT_RESUME_METADATA;
+  const pdfFontFamily = getPdfFontFamily(metadata.fontFamily, isRTL);
+  const styles = createStyles(isRTL, pdfFontFamily);
   const orderedSections = sortSections(resume.sections);
   const summarySection = orderedSections.find((section) => section.type === "SUMMARY");
   const summaryEntry = summarySection?.entries[0];

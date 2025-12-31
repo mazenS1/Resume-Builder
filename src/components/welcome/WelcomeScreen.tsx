@@ -1,10 +1,9 @@
-import { FileText, Globe, Sparkles } from "lucide-react";
+import { FileText, Globe, Sparkles, Shield, WifiOff, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAppModeStore } from "@/store/appModeStore";
 import { useResumeStore } from "@/store/resumeStore";
 import { sampleResume } from "@/data/sampleResume";
 import { sampleResumeAr } from "@/data/sampleResumeAr";
-import { translations } from "@/lib/i18n";
 import { nanoid } from "nanoid";
 import type { Resume } from "@resume/shared";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
@@ -17,8 +16,8 @@ export const WelcomeScreen = () => {
   const setActiveResumeId = useAppModeStore((state) => state.setActiveResumeId);
   const setResume = useResumeStore((state) => state.setResume);
   
-  const t = translations[language];
-  const isRTL = language === "ar";
+  // Always show UI in Arabic (RTL)
+  const isRTL = true;
 
   const createBlankResume = (): Resume => {
     const id = nanoid();
@@ -131,7 +130,7 @@ export const WelcomeScreen = () => {
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-primary flex items-center justify-center">
             <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
           </div>
-          <span className="font-semibold text-sm sm:text-base hidden sm:inline">{t.appName}</span>
+          <span className="font-semibold text-sm sm:text-base hidden sm:inline">منشئ السيرة الذاتية</span>
         </div>
         <ThemeToggle />
       </header>
@@ -143,21 +142,24 @@ export const WelcomeScreen = () => {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium">
               <Sparkles className="w-3.5 h-3.5" />
-              {t.atsReady}
+              جاهز لأنظمة التوظيف الذكية
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-              {t.welcomeTitle}
+              يلا نبني سيرتك الذاتية! 🚀
             </h1>
             <p className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto">
-              {t.welcomeSubtitle}
+              سوّي سيرة ذاتية احترافية في دقايق معدودة، بدون تعقيد وبشكل يناسب سوق العمل
             </p>
           </div>
 
           {/* Language Selection */}
-          <div className="space-y-3">
+          <div className="space-y-3 bg-muted/50 rounded-xl p-4 border border-border/50">
             <p className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
               <Globe className="w-4 h-4" />
-              {t.chooseLanguage}
+              اختر لغة السيرة الذاتية
+            </p>
+            <p className="text-xs text-muted-foreground/70">
+              هذا الخيار يحدد لغة محتوى سيرتك الذاتية فقط
             </p>
             <div className="flex gap-3 justify-center">
               <Button
@@ -166,7 +168,7 @@ export const WelcomeScreen = () => {
                 onClick={() => setLanguage("en")}
                 className="min-w-[140px] h-12 text-base"
               >
-                English
+                English Resume
               </Button>
               <Button
                 variant={language === "ar" ? "default" : "outline"}
@@ -175,7 +177,7 @@ export const WelcomeScreen = () => {
                 className="min-w-[140px] h-12 text-base font-arabic"
                 style={{ fontFamily: "'IBM Plex Sans Arabic', sans-serif" }}
               >
-                العربية
+                سيرة بالعربي
               </Button>
             </div>
           </div>
@@ -184,29 +186,63 @@ export const WelcomeScreen = () => {
           <div className="space-y-3 pt-4">
             <Button
               size="lg"
-              onClick={handleLoadSample}
+              onClick={handleStartFresh}
               className="w-full h-14 text-base sm:text-lg font-semibold"
             >
-              {t.loadSample}
+              ابدأ من الصفر ✨
             </Button>
             <Button
               variant="outline"
               size="lg"
-              onClick={handleStartFresh}
+              onClick={handleLoadSample}
               className="w-full h-14 text-base sm:text-lg"
             >
-              {t.startFresh}
+              شوف مثال جاهز
             </Button>
           </div>
 
+          {/* Security Features - More Prominent */}
+          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl p-4 space-y-3">
+            <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-400 font-medium">
+              <Shield className="w-5 h-5" />
+              <span>خصوصيتك أولويتنا</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+              <div className="flex flex-col items-center gap-1.5 p-2">
+                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                  <Lock className="w-4 h-4 text-green-600 dark:text-green-400" />
+                </div>
+                <p className="text-xs text-green-700 dark:text-green-400">
+                  بياناتك محفوظة على جهازك فقط
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1.5 p-2">
+                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                  <WifiOff className="w-4 h-4 text-green-600 dark:text-green-400" />
+                </div>
+                <p className="text-xs text-green-700 dark:text-green-400">
+                  يشتغل بدون نت
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1.5 p-2">
+                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-green-600 dark:text-green-400" />
+                </div>
+                <p className="text-xs text-green-700 dark:text-green-400">
+                  ما نشارك بياناتك مع أي طرف
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Features */}
-          <div className="grid grid-cols-3 gap-4 pt-6 text-center">
+          <div className="grid grid-cols-3 gap-4 pt-2 text-center">
             <div className="space-y-2">
               <div className="w-10 h-10 mx-auto rounded-full bg-muted flex items-center justify-center">
                 <FileText className="w-5 h-5 text-muted-foreground" />
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground">
-                {language === "ar" ? "قوالب احترافية" : "Pro Templates"}
+                تصميم احترافي
               </p>
             </div>
             <div className="space-y-2">
@@ -214,7 +250,7 @@ export const WelcomeScreen = () => {
                 <Sparkles className="w-5 h-5 text-muted-foreground" />
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground">
-                {language === "ar" ? "متوافق مع ATS" : "ATS Ready"}
+                متوافق مع ATS
               </p>
             </div>
             <div className="space-y-2">
@@ -222,7 +258,7 @@ export const WelcomeScreen = () => {
                 <Globe className="w-5 h-5 text-muted-foreground" />
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground">
-                {language === "ar" ? "يعمل بدون إنترنت" : "Works Offline"}
+                عربي وإنجليزي
               </p>
             </div>
           </div>
@@ -232,9 +268,7 @@ export const WelcomeScreen = () => {
       {/* Footer */}
       <footer className="p-4 text-center">
         <p className="text-xs text-muted-foreground">
-          {language === "ar" 
-            ? "بياناتك محفوظة محلياً على جهازك" 
-            : "Your data is stored locally on your device"}
+          صُنع بـ ❤️ للباحثين عن عمل في الوطن العربي
         </p>
       </footer>
     </div>
