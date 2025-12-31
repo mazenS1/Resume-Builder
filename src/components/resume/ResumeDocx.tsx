@@ -4,7 +4,6 @@ import {
   Packer,
   Paragraph,
   TextRun,
-  HeadingLevel,
   AlignmentType,
   BorderStyle,
   ExternalHyperlink,
@@ -14,15 +13,16 @@ import {
 } from "docx";
 import { FileText, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import type { Resume, ResumeEntry, ResumeSection } from "@resume/shared";
+import type { Resume, ResumeEntry } from "@resume/shared";
 import { Button } from "@/components/ui/button";
 import { formatDateRange } from "@/lib/utils";
 import { sortSections, sectionDisplayTitle } from "@/lib/resume";
 import { useAppModeStore } from "@/store/appModeStore";
 import { useResumeStore } from "@/store/resumeStore";
 
-// Helper to create a styled paragraph
-const createParagraph = (
+// Helper to create a styled paragrap
+/*
+const _createParagraph = (
   children: (TextRun | ExternalHyperlink)[],
   options: {
     alignment?: typeof AlignmentType[keyof typeof AlignmentType];
@@ -39,6 +39,7 @@ const createParagraph = (
     tabStops: options.tabStops,
   });
 };
+*/
 
 // Create section header
 const createSectionHeader = (title: string) => {

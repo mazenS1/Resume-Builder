@@ -11,7 +11,7 @@ interface SummaryFormProps {
 }
 
 export const SummaryForm = ({
-  section,
+  section: _section,
   entry,
   onUpdate,
   isRTL,

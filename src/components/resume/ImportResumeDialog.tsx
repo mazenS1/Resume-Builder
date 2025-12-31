@@ -10,7 +10,7 @@ import {
 import { Upload, FileText, FileJson, Loader2 } from "lucide-react";
 import { useResumeStore } from "@/store/resumeStore";
 import { useAppModeStore } from "@/store/appModeStore";
-import { translations } from "@/lib/i18n";
+//import { translations } from "@/lib/i18n";
 import { toast } from "sonner";
 import type { Resume } from "@resume/shared";
 
@@ -21,7 +21,7 @@ export const ImportResumeDialog = () => {
   const setResume = useResumeStore((state) => state.setResume);
   const language = useAppModeStore((state) => state.language);
   const saveResume = useAppModeStore((state) => state.saveResume);
-  const t = translations[language];
+  //const _t = translations[language];
   const isRTL = language === "ar";
 
   const handleFileSelect = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
