@@ -8,15 +8,15 @@ A free, open-source resume builder with full Arabic and English support. Create 
 
 ## ✨ Features
 
-- **🌍 Bilingual Support** - Full Arabic (RTL) and English (LTR) support
-- **📱 Responsive Design** - Works on desktop, tablet, and mobile
-- **🔒 Privacy First** - All data stays in your browser (localStorage)
-- **📄 Multiple Export Formats** - Export to PDF and DOCX
-- **🎨 Customizable Themes** - Light/dark mode with customizable colors and fonts
-- **📝 ATS-Friendly** - Clean, parseable resume format that passes ATS systems
-- **🔄 Drag & Drop** - Reorder sections and entries easily
-- **💾 Auto-Save** - Never lose your work
-- **📥 Import/Export JSON** - Backup and restore your resume data
+- **Bilingual Support** - Full Arabic (RTL) and English (LTR) support
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **Privacy First** - All data stays in your browser (localStorage)
+- **Multiple Export Formats** - Export to PDF and DOCX
+- **Customizable Themes** - Light/dark mode with customizable colors and fonts
+- **ATS-Friendly** - Clean, parseable resume format that passes ATS systems
+- **Drag & Drop** - Reorder sections and entries easily
+- **Auto-Save** - Never lose your work
+- **📥Import/Export JSON** - Backup and restore your resume data
 
 ## 🚀 Quick Start
 
@@ -29,7 +29,7 @@ A free, open-source resume builder with full Arabic and English support. Create 
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/resumearab.git
+git clone https://github.com/mazenS1/Resume-FrontEnd.git
 cd resumearab
 
 # Install dependencies
@@ -147,4 +147,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ for the Arabic-speaking community and beyond.
+Made with ❤️ for Job seekers.
