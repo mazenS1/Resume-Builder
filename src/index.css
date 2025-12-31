@@ -1,0 +1,516 @@
+/* Arabic font support */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap");
+/* EB Garamond for English resume - matches PDF font */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap");
+
+:root {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Arabic font for RTL mode */
+html[lang="ar"] {
+  font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-screen;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  /* iOS date input overflow fix */
+  input[type="month"],
+  input[type="date"],
+  input[type="datetime-local"],
+  .date-input-ios {
+    min-width: 0;
+    max-width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* iOS Safari date picker containment */
+  @supports (-webkit-touch-callout: none) {
+    input[type="month"],
+    input[type="date"],
+    input[type="datetime-local"] {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Touch-friendly improvements for mobile */
+  @media (max-width: 768px) {
+    * {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+    }
+
+    button,
+    a,
+    input,
+    textarea,
+    select {
+      touch-action: manipulation;
+    }
+
+    /* iOS date input specific fixes */
+    input[type="month"],
+    input[type="date"],
+    input[type="datetime-local"] {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      padding-right: 8px;
+      padding-left: 8px;
+    }
+
+    /* Larger touch targets on mobile */
+    input,
+    textarea,
+    select,
+    button {
+      min-height: 44px;
+    }
+
+    /* Prevent zoom on input focus for iOS */
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Improved scrolling on mobile */
+  @media (max-width: 1024px) {
+    body {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+  }
+
+  /* RTL-aware spacing utilities */
+  html[dir="rtl"] .ms-1 {
+    margin-right: 0.25rem;
+    margin-left: 0;
+  }
+  html[dir="rtl"] .ms-2 {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  html[dir="rtl"] .ms-3 {
+    margin-right: 0.75rem;
+    margin-left: 0;
+  }
+  html[dir="rtl"] .me-1 {
+    margin-left: 0.25rem;
+    margin-right: 0;
+  }
+  html[dir="rtl"] .me-2 {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+  html[dir="rtl"] .me-3 {
+    margin-left: 0.75rem;
+    margin-right: 0;
+  }
+  html[dir="rtl"] .ps-2 {
+    padding-right: 0.5rem;
+    padding-left: 0;
+  }
+  html[dir="rtl"] .pe-2 {
+    padding-left: 0.5rem;
+    padding-right: 0;
+  }
+
+  /* Text alignment for RTL */
+  html[dir="rtl"] .text-start {
+    text-align: right;
+  }
+  html[dir="rtl"] .text-end {
+    text-align: left;
+  }
+
+  .resume-page {
+    width: 8.5in;
+    min-height: 11in;
+    max-width: 100%;
+    padding: 1.1in 1.15in;
+    background-color: #ffffff;
+    color: #0f172a;
+  }
+
+  /* Preview wrapper - centers and contains the scaled preview */
+  .resume-preview-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  /* Preview scaler - scales down the resume to fit viewport */
+  .resume-preview-scaler {
+    transform: scale(0.45);
+    transform-origin: top center;
+    margin-bottom: -55%;
+  }
+
+  /* Tablet scaling */
+  @media (min-width: 640px) {
+    .resume-preview-scaler {
+      transform: scale(0.55);
+      margin-bottom: -45%;
+    }
+  }
+
+  /* Small desktop scaling */
+  @media (min-width: 1024px) {
+    .resume-preview-scaler {
+      transform: scale(0.6);
+      margin-bottom: -40%;
+    }
+  }
+
+  /* Larger desktop scaling */
+  @media (min-width: 1280px) {
+    .resume-preview-scaler {
+      transform: scale(0.7);
+      margin-bottom: -30%;
+    }
+  }
+
+  /* Extra large screens */
+  @media (min-width: 1536px) {
+    .resume-preview-scaler {
+      transform: scale(0.8);
+      margin-bottom: -20%;
+    }
+  }
+
+  /* Classic Resume Template - Fixed width to match PDF download (8.5in) */
+  .resume-page-classic {
+    /* Fixed width matching PDF download dimensions for accurate preview */
+    width: 8.5in;
+    min-width: 8.5in;
+    max-width: 8.5in;
+    min-height: 11in;
+    /* Match PDF padding exactly: 20px 24px 20px 24px */
+    padding: 20px 24px 20px 24px;
+    background-color: #ffffff !important;
+    /* Color and font-family are set via inline styles from metadata */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid #e2e8f0;
+    margin: 0 auto;
+  }
+
+  /* Arabic font family - only when no inline style */
+  .resume-page-classic.rtl:not([style*="font-family"]) {
+    font-family: "IBM Plex Sans Arabic", "Traditional Arabic",
+      "Simplified Arabic", Arial, sans-serif;
+  }
+
+  /* Desktop - enhanced shadow */
+  @media (min-width: 1024px) {
+    .resume-page-classic {
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+        0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  /* Dark mode - keep resume white but respect inline color styles */
+  .dark .resume-page-classic {
+    background-color: #ffffff !important;
+    /* Color is set via inline styles from metadata */
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5),
+      0 8px 10px -6px rgb(0 0 0 / 0.5);
+  }
+
+  /* RTL Support */
+  .resume-page-classic.rtl {
+    direction: rtl;
+    text-align: right !important;
+  }
+
+  .resume-page-classic.rtl * {
+    text-align: right !important;
+    direction: rtl;
+  }
+
+  .resume-page-classic.rtl .classic-entry-title {
+    text-align: right !important;
+    display: block;
+    width: 100%;
+  }
+
+  .resume-page-classic.rtl .classic-section-header {
+    text-align: right !important;
+  }
+
+  .resume-page-classic.rtl .classic-body-text {
+    text-align: right !important;
+    display: block;
+    width: 100%;
+  }
+
+  .resume-page-classic.rtl .classic-bullet-list {
+    margin-right: 18px;
+    margin-left: 0;
+    text-align: right !important;
+    list-style-position: inside;
+    direction: rtl;
+  }
+
+  @media (min-width: 640px) {
+    .resume-page-classic.rtl .classic-bullet-list {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+
+    .resume-page-classic.rtl .classic-date {
+      margin-right: 12px;
+      margin-left: 0;
+    }
+  }
+
+  .resume-page-classic.rtl .classic-bullet-list li {
+    text-align: right !important;
+    padding-right: 0;
+    padding-left: 0;
+    direction: rtl;
+  }
+
+  /* Center alignment for RTL header */
+  .resume-page-classic.rtl header {
+    text-align: center !important;
+    direction: rtl;
+  }
+
+  .resume-page-classic.rtl header * {
+    text-align: center !important;
+  }
+
+  /* RTL flex container adjustments */
+  .resume-page-classic.rtl article > div {
+    align-items: flex-start;
+  }
+
+  .resume-page-classic.rtl section > div {
+    align-items: flex-start;
+  }
+
+  /* Ensure all flex children align right in RTL */
+  .resume-page-classic.rtl article,
+  .resume-page-classic.rtl section {
+    text-align: right !important;
+  }
+
+  .resume-page-classic.rtl article > *,
+  .resume-page-classic.rtl section > * {
+    text-align: right !important;
+  }
+
+  .classic-section-header {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: inherit;
+    padding-bottom: 1px;
+    border-bottom-width: 0.5px;
+    border-bottom-style: solid;
+    border-bottom-color: currentColor;
+    margin-bottom: 3px;
+    line-height: inherit;
+  }
+
+  @media (min-width: 640px) {
+    .classic-section-header {
+      font-size: 11px;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+  }
+
+  .classic-entry-title {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  @media (min-width: 640px) {
+    .classic-entry-title {
+      font-size: 10.5px;
+    }
+  }
+
+  .classic-date {
+    font-size: 9px;
+    line-height: inherit;
+    color: inherit;
+    white-space: nowrap;
+    text-align: inherit;
+  }
+
+  @media (min-width: 640px) {
+    .classic-date {
+      font-size: 9.5px;
+      margin-left: 8px;
+    }
+  }
+
+  /* RTL adjustments for date in responsive mode */
+  .resume-page-classic.rtl .classic-date {
+    text-align: right !important;
+  }
+
+  @media (min-width: 640px) {
+    .resume-page-classic.rtl .classic-date {
+      text-align: left !important;
+    }
+  }
+
+  .classic-body-text {
+    font-size: 9.5px;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  @media (min-width: 640px) {
+    .classic-body-text {
+      font-size: 10px;
+    }
+  }
+
+  .classic-bullet-list {
+    margin-top: 1px;
+    margin-left: 12px;
+    list-style-type: disc;
+  }
+
+  @media (min-width: 640px) {
+    .classic-bullet-list {
+      margin-left: 14px;
+      margin-top: 2px;
+    }
+  }
+
+  .classic-bullet-list li {
+    font-size: 9.5px;
+    line-height: inherit;
+    color: inherit;
+    margin-bottom: 1px;
+    padding-left: 1px;
+  }
+
+  @media (min-width: 640px) {
+    .classic-bullet-list li {
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+  }
+
+  .classic-bullet-list li::marker {
+    font-size: 6.5px;
+  }
+
+  @media (min-width: 640px) {
+    .classic-bullet-list li::marker {
+      font-size: 8px;
+    }
+  }
+}
+
+@media print {
+  body {
+    background-color: #ffffff;
+  }
+
+  #root {
+    min-height: auto;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .resume-page {
+    box-shadow: none !important;
+    margin: 0 auto;
+    padding: 0.9in 1in;
+    page-break-after: avoid;
+  }
+
+  .resume-page-classic {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto;
+    padding: 0.35in 0.4in 0.4in 0.4in;
+    page-break-after: avoid;
+  }
+}
