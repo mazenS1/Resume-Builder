@@ -6,19 +6,21 @@ interface AppModeState {
   // Core settings
   darkMode: boolean;
   language: "en" | "ar";
-  
-  // Onboarding
+
+  // Landing & Onboarding
+  hasSeenLanding: boolean;
   hasCompletedOnboarding: boolean;
-  
+
   // Local resume storage
   savedResumes: Resume[];
   activeResumeId: string | null;
-  
+
   // Actions
   setDarkMode: (value: boolean) => void;
   setLanguage: (value: "en" | "ar") => void;
+  setHasSeenLanding: (value: boolean) => void;
   setHasCompletedOnboarding: (value: boolean) => void;
-  
+
   // Resume management
   saveResume: (resume: Resume) => void;
   deleteResume: (resumeId: string) => void;
@@ -32,17 +34,19 @@ export const useAppModeStore = create<AppModeState>()(
       // Core settings - defaults
       darkMode: false,
       language: "en",
-      
-      // Onboarding
+
+      // Landing & Onboarding
+      hasSeenLanding: false,
       hasCompletedOnboarding: false,
-      
+
       // Local resume storage
       savedResumes: [],
       activeResumeId: null,
-      
+
       // Actions
       setDarkMode: (value) => set({ darkMode: value }),
       setLanguage: (value) => set({ language: value }),
+      setHasSeenLanding: (value) => set({ hasSeenLanding: value }),
       setHasCompletedOnboarding: (value) => set({ hasCompletedOnboarding: value }),
       
       // Resume management
@@ -74,7 +78,7 @@ export const useAppModeStore = create<AppModeState>()(
     }),
     {
       name: "resume-app-storage",
-      version: 2,
+      version: 3,
     }
   )
 );

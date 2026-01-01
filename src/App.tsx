@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { ResumeBuilder } from "@/components/resume/ResumeBuilder";
 import { WelcomeScreen } from "@/components/welcome";
+import { LandingPage } from "@/components/landing";
 import { useResumeStore } from "@/store/resumeStore";
 import { useAppModeStore } from "@/store/appModeStore";
 
 const App = () => {
   const resume = useResumeStore((state) => state.resume);
+  const hasSeenLanding = useAppModeStore((state) => state.hasSeenLanding);
   const hasCompletedOnboarding = useAppModeStore((state) => state.hasCompletedOnboarding);
   const language = useAppModeStore((state) => state.language);
   const savedResumes = useAppModeStore((state) => state.savedResumes);
@@ -33,6 +35,11 @@ const App = () => {
       }
     }
   }, [activeResumeId, savedResumes, resume, setResume]);
+
+  // Show landing page if user hasn't seen it yet
+  if (!hasSeenLanding) {
+    return <LandingPage />;
+  }
 
   // Show welcome screen if user hasn't completed onboarding
   if (!hasCompletedOnboarding || !resume) {
