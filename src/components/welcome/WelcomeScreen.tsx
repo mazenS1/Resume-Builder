@@ -243,7 +243,7 @@ export const WelcomeScreen = () => {
                   <WifiOff className="w-4 h-4 text-[#c9a96e]" />
                 </div>
                 <p className="text-[10px] sm:text-xs text-[#9a9a9a]">
-مانتصل بخوادم
+                  ما نتصل بخوادم
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2 p-2">

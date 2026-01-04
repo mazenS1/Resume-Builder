@@ -91,10 +91,10 @@ export const ResumeBuilder = () => {
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Mobile Header */}
-      <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-sm print:hidden">
+      <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-sm print:hidden overflow-x-hidden">
         <div className="flex items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3">
           {/* Left: Title */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 overflow-hidden">
             <h1 className="text-base sm:text-lg font-semibold truncate">{t.appName}</h1>
             <p className="text-[10px] sm:text-xs text-muted-foreground">
               {lastSaved ? t.allChangesSaved : t.localMode}

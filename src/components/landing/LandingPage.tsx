@@ -145,7 +145,7 @@ export const LandingPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-[#1a1a1a] text-[#fafafa] overflow-hidden"
+      className="min-h-screen bg-[#1a1a1a] text-[#fafafa] overflow-x-hidden"
       dir="rtl"
     >
       {/* Header */}
@@ -211,7 +211,7 @@ export const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 lg:px-16 pt-24 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 lg:px-16 pt-24 overflow-x-hidden">
         <div className="absolute top-0 bottom-0 right-[15%] w-px bg-gradient-to-b from-transparent via-[#444] to-transparent opacity-50 hidden sm:block" />
 
         <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-24 items-center py-16 sm:py-32">
@@ -302,7 +302,7 @@ export const LandingPage = () => {
           </div>
 
           {/* Resume Preview Column - Interactive Carousel */}
-          <div className="order-2 relative px-2 sm:px-0">
+          <div className="order-2 relative px-2 sm:px-0 overflow-hidden">
             <div
               className={cn(
                 "relative transition-all duration-700 delay-500",
@@ -314,7 +314,7 @@ export const LandingPage = () => {
               <div className="absolute -inset-4 border border-[#444] hidden sm:block" />
 
               {/* Template Carousel */}
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-sm">
                 <div
                   className="flex transition-transform duration-500 ease-out"
                   style={{ transform: `translateX(${currentTemplate * 100}%)` }}
