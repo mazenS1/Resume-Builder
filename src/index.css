@@ -75,10 +75,12 @@ html[lang="ar"] {
 
   body {
     @apply bg-background text-foreground min-h-screen;
+    overflow-x: hidden;
   }
 
   #root {
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* iOS date input overflow fix */

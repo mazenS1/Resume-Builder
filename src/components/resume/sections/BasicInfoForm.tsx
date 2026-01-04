@@ -105,18 +105,18 @@ export const BasicInfoForm = ({
         ) : (
           <div className="space-y-2">
             {basicInfo.links.map((link, index) => (
-              <div key={index} className="flex items-center gap-2">
+              <div key={index} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 <Input
                   value={link.label}
                   onChange={(e) => onUpdateLink(index, "label", e.target.value)}
                   placeholder={t.linkLabelPlaceholder}
-                  className="h-10 text-sm flex-[0.4]"
+                  className="h-10 text-sm sm:flex-[0.4] min-w-0"
                 />
                 <Input
                   value={link.url}
                   onChange={(e) => onUpdateLink(index, "url", e.target.value)}
                   placeholder={t.linkUrlPlaceholder}
-                  className="h-10 text-sm flex-[0.6]"
+                  className="h-10 text-sm sm:flex-[0.6] min-w-0"
                   dir="ltr"
                 />
                 <Button
@@ -124,7 +124,7 @@ export const BasicInfoForm = ({
                   variant="ghost"
                   size="sm"
                   onClick={() => onRemoveLink(index)}
-                  className="h-10 w-10 p-0 text-muted-foreground hover:text-destructive flex-shrink-0"
+                  className="h-10 w-10 p-0 text-muted-foreground hover:text-destructive flex-shrink-0 self-end sm:self-auto"
                 >
                   <X className="h-4 w-4" />
                 </Button>
